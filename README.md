@@ -26,11 +26,11 @@ Usage:
 
 ```
 Usage: rmonitor [option]
-        --append [NAME]              Create a profile with an optional name and append it to the configuration
-        --create [NAME]              Create a profile with an optional name
+        --append [NAME]              Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)
+        --create [NAME]              Create and output a profile with an optional name
         --invoke NAME                Invoke a profile with a given name
         --update                     Invoke the most preferable profile
-    -h, --help                       Show this messag
+    -h, --help                       Show this message
 ```
 
 ### --create [NAME]

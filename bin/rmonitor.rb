@@ -8,12 +8,12 @@ options = { :action => :create }
 OptionParser.new do |opts|
   opts.banner = "Usage: rmonitor [option]"
 
-  opts.on("--append [NAME]", String, "Create a profile with an optional name and append it to the configuration") do |name|
+  opts.on("--append [NAME]", String, "Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)") do |name|
     options[:action] = :append
     options[:name] = name
   end
 
-  opts.on("--create [NAME]", String, "Create a profile with an optional name") do |name|
+  opts.on("--create [NAME]", String, "Create and output a profile with an optional name") do |name|
     options[:action] = :create
     options[:name] = name
   end
