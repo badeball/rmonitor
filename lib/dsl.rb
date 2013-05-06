@@ -22,7 +22,7 @@ module RMonitor
         @devices = []
       end
 
-      def device(name, options)
+      def device(name, options = {})
         @devices << { :name => name }.merge(options)
       end
     end
