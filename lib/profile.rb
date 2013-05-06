@@ -2,6 +2,7 @@ module RMonitor
   module Profile
     def self.invokable?(profile)
       profile.all? do |device|
+        DEVICES.has_key?(device[:name]) and
         !first_matching_configuration(DEVICES[device[:name]],
                                       device[:mode],
                                       device[:rate]).nil?
