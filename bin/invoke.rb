@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
-profile = RMonitor::PROFILES[ARGV.first]
+profile = RMonitor::PROFILES.find { |p| p[:name] == ARGV.first }
 
 if profile
   if RMonitor::Profile.invokable?(profile)

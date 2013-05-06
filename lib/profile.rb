@@ -1,7 +1,7 @@
 module RMonitor
   module Profile
     def self.invokable?(profile)
-      profile.all? do |device|
+      profile[:devices].all? do |device|
         DEVICES.has_key?(device[:name]) and
         !first_matching_configuration(DEVICES[device[:name]],
                                       device[:mode],
@@ -12,7 +12,7 @@ module RMonitor
     def self.to_xrandr(profile)
       xrandr = 'xrandr'
 
-      off = (DEVICES.keys - profile.map { |d| d[:name] })
+      off = (DEVICES.keys - profile[:devices].map { |d| d[:name] })
 
       unless off.empty?
         off.each do |name|
@@ -22,7 +22,7 @@ module RMonitor
         xrandr << ' && xrandr'
       end
 
-      profile.each do |device|
+      profile[:devices].each do |device|
         configuration = first_matching_configuration(DEVICES[device[:name]],
                                                      device[:mode],
                                                      device[:rate])

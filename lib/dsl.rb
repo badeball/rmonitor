@@ -4,14 +4,14 @@ module RMonitor
       attr_accessor :profiles
 
       def initialize
-        @profiles = {}
+        @profiles = []
       end
 
       def profile(name, &block)
         device_parser = DSLDevice.new
         device_parser.instance_eval(&block)
 
-        @profiles[name] = device_parser.devices
+        @profiles << { :name => name, :devices => device_parser.devices }
       end
     end
 
