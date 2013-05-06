@@ -2,11 +2,13 @@
 
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
-profile = RMonitor::PROFILES.find { |p| p[:name] == ARGV.first }
+rm = RMonitor::RMonitor.load
+
+profile = rm.profiles.find { |p| p[:name] == ARGV.first }
 
 if profile
-  if RMonitor::Profile.invokable?(profile)
-    exec(RMonitor::Profile.to_xrandr(profile))
+  if RMonitor::Profiles.invokable?(rm.devices, profile)
+    exec(RMonitor::Profiles.to_xrandr(rm.devices, profile))
   else
     puts 'error: this profile is not invokable'
   end

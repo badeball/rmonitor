@@ -33,8 +33,14 @@ package() {
     install -D -m755 bin/create.rb   "${pkgdir}/usr/lib/${pkgname}/bin/create"
     install -D -m755 bin/invoke.rb   "${pkgdir}/usr/lib/${pkgname}/bin/invoke"
     install -D -m755 bin/update.rb   "${pkgdir}/usr/lib/${pkgname}/bin/update"
-    install -D -m644 lib/dsl.rb      "${pkgdir}/usr/lib/${pkgname}/lib/dsl.rb"
-    install -D -m644 lib/profile.rb  "${pkgdir}/usr/lib/${pkgname}/lib/profile.rb"
-    install -D -m644 lib/xrandr.rb   "${pkgdir}/usr/lib/${pkgname}/lib/xrandr.rb"
+
+    install -D -m644 lib/helpers/dsl_helpers.rb          "${pkgdir}/usr/lib/${pkgname}/lib/helpers/dsl_helpers.rb"
+    install -D -m644 lib/helpers/profile_helpers.rb      "${pkgdir}/usr/lib/${pkgname}/lib/helpers/profile_helpers.rb"
+    install -D -m644 lib/helpers/xrandr_read_helpers.rb  "${pkgdir}/usr/lib/${pkgname}/lib/helpers/xrandr_read_helpers.rb"
+    install -D -m644 lib/helpers/xrandr_write_helpers.rb "${pkgdir}/usr/lib/${pkgname}/lib/helpers/xrandr_write_helpers.rb"
+
+    install -D -m644 lib/devices.rb  "${pkgdir}/usr/lib/${pkgname}/lib/devices.rb"
+    install -D -m644 lib/profiles.rb "${pkgdir}/usr/lib/${pkgname}/lib/profiles.rb"
+
     install -D -m644 rmonitor.rb     "${pkgdir}/usr/lib/${pkgname}/rmonitor.rb"
 }

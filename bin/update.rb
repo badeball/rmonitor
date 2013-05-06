@@ -2,9 +2,11 @@
 
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
+rm = RMonitor::RMonitor.load
+
 # Find the first invokable profile
-profile = RMonitor::PROFILES.find do |profile|
-  RMonitor::Profile.invokable?(profile)
+profile = rm.profiles.find do |profile|
+  RMonitor::Profiles.invokable?(rm.devices, profile)
 end
 
 if profile

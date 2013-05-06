@@ -2,11 +2,13 @@
 
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
+rm = RMonitor::RMonitor.load
+
 puts "profile #{(ARGV.first || 'My profile').inspect} do"
-  RMonitor::DEVICES.each do |name, device|
-    if device[:configuration]
+  rm.devices.each do |device|
+    if device[:enabled]
       puts '  device %s, :mode => %s, :rate => %s, :pos => %s' % [
-          name.inspect,
+          device[:name].inspect,
           device[:configuration][:mode].inspect,
           device[:configuration][:rate].inspect,
           device[:pos].inspect,
