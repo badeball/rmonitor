@@ -15,7 +15,7 @@ module RMonitor
       off = (DEVICES.keys - profile.map { |d| d[:name] })
 
       unless off.empty?
-        (DEVICES.keys - profile.map { |d| d[:name] }).each do |name|
+        off.each do |name|
           xrandr << ' --output %{name} --off' % { :name => name }
         end
 
