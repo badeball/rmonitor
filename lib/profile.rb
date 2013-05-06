@@ -12,6 +12,16 @@ module RMonitor
     def self.to_xrandr(profile)
       xrandr = 'xrandr'
 
+      off = (DEVICES.keys - profile.map { |d| d[:name] })
+
+      unless off.empty?
+        (DEVICES.keys - profile.map { |d| d[:name] }).each do |name|
+          xrandr << ' --output %{name} --off' % { :name => name }
+        end
+
+        xrandr << ' && xrandr'
+      end
+
       profile.each do |device|
         configuration = first_matching_configuration(DEVICES[device[:name]],
                                                      device[:mode],
@@ -34,10 +44,6 @@ module RMonitor
         elsif device[:below]
           xrandr << " --below #{device[:below]}"
         end
-      end
-
-      (DEVICES.keys - profile.map { |d| d[:name] }).each do |name|
-        xrandr << ' --output %{name} --off' % { :name => name }
       end
 
       xrandr
