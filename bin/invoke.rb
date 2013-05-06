@@ -5,7 +5,11 @@ require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 profile = RMonitor::PROFILES[ARGV.first]
 
 if profile
-  exec(RMonitor::Profile.to_xrandr(profile))
+  if RMonitor::Profile.invokable?(profile)
+    exec(RMonitor::Profile.to_xrandr(profile))
+  else
+    puts 'error: this profile is not invokable'
+  end
 else
   puts 'notice: no profile with that name exists'
 end
