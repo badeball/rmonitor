@@ -1,5 +1,7 @@
 ## RMonitor
 
+[![Build Status](https://travis-ci.org/badeball/rmonitor.png)](https://travis-ci.org/badeball/rmonitor)
+
 RMonitor is a tool for creating monitor profiles that are easily invoked. This
 is useful when you often find yourself in situations with different monitor
 configurations. It consists of one executable and a ruby configuration file.
