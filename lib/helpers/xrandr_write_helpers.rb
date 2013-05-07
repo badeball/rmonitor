@@ -23,6 +23,10 @@ module RMonitor
         on << ' --below %s'    % [options[:below]]
       end
 
+      if options[:primary]
+        on << ' --primary'
+      end
+
       on
     end
   end
