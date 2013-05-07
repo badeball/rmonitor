@@ -13,8 +13,8 @@ module RMonitor
 
     def best_matching_configuration(device, mode, rate)
       device[:configurations].find do |configuration|
-        !mode or configuration[:mode] == mode &&
-            !rate or configuration[:rate] == rate
+        (!mode or configuration[:mode] == mode) &&
+            (!rate or configuration[:rate] == rate)
       end
     end
 
