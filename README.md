@@ -61,3 +61,56 @@ Parses the configuration file from top to bottom and invokes the first
 invokable profile based on what devices that are currently connected. This is
 likely the most used option and may for instance be used to automatically
 configure your screens upon startup.
+
+## Configurable options
+
+The following examples shows how RMonitor can be configured.
+
+```ruby
+# Specify device location with position
+profile "docked" do
+  device "HDMI1", :pos => "0x0"
+  device "HDMI2", :pos => "1920x0"
+end
+```
+
+```ruby
+# Specify device location relative to another device
+# Similar options include :left_of, :above, :below
+profile "docked" do
+  device "HDMI1"
+  device "HDMI2", :right_of => "HDMI1"
+end
+```
+
+```ruby
+# Specify device mode (resolution), best rate is chosen automatically
+profile "docked" do
+  device "HDMI1", :mode => "1920x1080"
+  device "HDMI2", :mode => "1920x1080"
+end
+```
+
+```ruby
+# Specify device rate, best mode (resolution is chosen automatically
+profile "docked" do
+  device "HDMI1", :rate => "60.0"
+  device "HDMI2", :rate => "60.0"
+end
+```
+
+```ruby
+# Specify device mode (resolution) and rate
+profile "docked" do
+  device "HDMI1", :mode => "1920x1080", :rate => "60.0"
+  device "HDMI2", :mode => "1920x1080", :rate => "60.0"
+end
+```
+
+```ruby
+# Specify dpi (dots per inch)
+profile "docked", :dpi => 96 do
+  device "HDMI1"
+  device "HDMI2"
+end
+```
