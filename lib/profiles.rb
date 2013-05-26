@@ -29,6 +29,10 @@ module RMonitor
         xrandr << ' && xrandr'
       end
 
+      if profile[:options] and profile[:options][:dpi]
+        xrandr << ' --dpi %s' % [profile[:options][:dpi]]
+      end
+
       # The devices contained in the profile are to be turned on and configured
       profile[:devices].each do |wanted_device|
         device = devices.find { |d| d[:name] == wanted_device[:name] }

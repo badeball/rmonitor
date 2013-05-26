@@ -7,11 +7,13 @@ module RMonitor
         @profiles = []
       end
 
-      def profile(name, &block)
+      def profile(name, options = {}, &block)
         device_parser = Device.new
         device_parser.instance_eval(&block)
 
-        @profiles << { :name => name, :devices => device_parser.devices }
+        @profiles << { :name => name,
+                       :options => options,
+                       :devices => device_parser.devices }
       end
     end
 
