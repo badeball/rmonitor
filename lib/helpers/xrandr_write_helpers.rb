@@ -1,7 +1,7 @@
 module RMonitor
   module XRandRWriteHelpers
     def turn_off(device)
-      '--output %s --off' % [device]
+      "--output #{device} --off"
     end
 
     def turn_on(device, options)
@@ -12,24 +12,24 @@ module RMonitor
       ]
 
       if options[:pos]
-        on << ' --pos %s'      % [options[:pos]]
+        on << ' --pos '      << options[:pos]
       elsif options[:left_of]
-        on << ' --left-of %s'  % [options[:left_of]]
+        on << ' --left-of '  << options[:left_of]
       elsif options[:right_of]
-        on << ' --right-of %s' % [options[:right_of]]
+        on << ' --right-of ' << options[:right_of]
       elsif options[:above]
-        on << ' --above %s'    % [options[:above]]
+        on << ' --above '    << options[:above]
       elsif options[:below]
-        on << ' --below %s'    % [options[:below]]
+        on << ' --below '    << options[:below]
       elsif options[:same_as]
-        on << ' --same-as %s'  % [options[:same_as]]
+        on << ' --same-as '  << options[:same_as]
       end
 
       if options[:rotate]
         allowed_options = %w(normal inverted left right)
 
         if allowed_options.include?(options[:rotate])
-          on << ' --rotate %s' % [options[:rotate]]
+          on << ' --rotate ' << options[:rotate]
         else
           raise XRandRArgumentError.new("Invalid argument for --rotate")
         end
@@ -39,7 +39,7 @@ module RMonitor
         allowed_options = %w(normal x y xy)
 
         if allowed_options.include?(options[:reflect])
-          on << ' --reflect %s' % [options[:reflect]]
+          on << ' --reflect ' << options[:reflect]
         else
           raise XRandRArgumentError.new("Invalid argument for --reflect")
         end

@@ -23,14 +23,14 @@ module RMonitor
 
       unless to_disable.empty?
         to_disable.each do |name|
-          xrandr << ' %s' % [turn_off(name)]
+          xrandr << ' ' << turn_off(name)
         end
 
         xrandr << ' && xrandr'
       end
 
       if profile[:options] and profile[:options][:dpi]
-        xrandr << ' --dpi %s' % [profile[:options][:dpi]]
+        xrandr << ' --dpi ' << profile[:options][:dpi]
       end
 
       # The devices contained in the profile are to be turned on and configured
@@ -41,8 +41,8 @@ module RMonitor
                                                     wanted_device[:mode],
                                                     wanted_device[:rate])
 
-        xrandr << ' %s' % [turn_on(device[:name],
-                                   configuration.merge(wanted_device))]
+        xrandr << ' ' << turn_on(device[:name],
+                                 configuration.merge(wanted_device))
       end
 
       xrandr
