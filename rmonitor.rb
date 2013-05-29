@@ -4,6 +4,8 @@ require File.join(File.dirname(__FILE__), 'lib', 'devices')
 require File.join(File.dirname(__FILE__), 'lib', 'profiles')
 
 module RMonitor
+  class XRandRArgumentError < ArgumentError; end
+
   CONFIG_PATH = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
 
   # Create a config directory and config file if they don't exist

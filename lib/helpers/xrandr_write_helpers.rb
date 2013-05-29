@@ -25,6 +25,16 @@ module RMonitor
         on << ' --same-as %s'  % [options[:same_as]]
       end
 
+      if options[:rotate]
+        allowed_options = %w(normal inverted left right)
+
+        if allowed_options.include?(options[:rotate])
+          on << ' --rotate %s' % [options[:rotate]]
+        else
+          raise XRandRArgumentError.new("Invalid argument for --rotate")
+        end
+      end
+
       if options[:primary]
         on << ' --primary'
       end

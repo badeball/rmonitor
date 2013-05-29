@@ -112,5 +112,26 @@ describe RMonitor::XRandRWriteHelpers do
       turn_on("HDMI2", options).should ==
           "--output HDMI2 --mode 1920x1080 --rate 60.0 --primary"
     end
+
+    it "should return a XRandR directive containing --rotate when specified" do
+      options = {
+          :mode => "1920x1080",
+          :rate => "60.0",
+          :rotate => "normal",
+      }
+
+      turn_on("HDMI2", options).should ==
+          "--output HDMI2 --mode 1920x1080 --rate 60.0 --rotate normal"
+    end
+
+    it "should raise an exception if a wrong --rotate directive is specified" do
+      options = {
+          :mode => "1920x1080",
+          :rate => "60.0",
+          :rotate => "this does not exist",
+      }
+
+      lambda { turn_on("HDMI2", options) }.should raise_error
+    end
   end
 end
