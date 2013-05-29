@@ -75,6 +75,17 @@ describe RMonitor::XRandRWriteHelpers do
           "--output HDMI2 --mode 1920x1080 --rate 60.0 --below HDMI1"
     end
 
+    it "should return a XRandR directive containing --same-as when specified" do
+      options = {
+          :mode => "1920x1080",
+          :rate => "60.0",
+          :same_as => "LVDS1",
+      }
+
+      turn_on("HDMI2", options).should ==
+          "--output HDMI2 --mode 1920x1080 --rate 60.0 --same-as LVDS1"
+    end
+
     it "should return a XRandR directive containing only one option specifying placement when given multiple" do
       options = {
           :mode => "1920x1080",
@@ -83,6 +94,7 @@ describe RMonitor::XRandRWriteHelpers do
           :left_of => "HDMI1",
           :right_of => "HDMI1",
           :above => "HDMI1",
+          :same_as => "LVDS1",
           :below => "HDMI1",
       }
 

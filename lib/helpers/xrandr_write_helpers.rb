@@ -21,6 +21,8 @@ module RMonitor
         on << ' --above %s'    % [options[:above]]
       elsif options[:below]
         on << ' --below %s'    % [options[:below]]
+      elsif options[:same_as]
+        on << ' --same-as %s'  % [options[:same_as]]
       end
 
       if options[:primary]
