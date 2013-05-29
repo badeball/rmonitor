@@ -133,5 +133,26 @@ describe RMonitor::XRandRWriteHelpers do
 
       lambda { turn_on("HDMI2", options) }.should raise_error
     end
+
+    it "should return a XRandR directive containing --reflect when specified" do
+      options = {
+          :mode => "1920x1080",
+          :rate => "60.0",
+          :reflect => "normal",
+      }
+
+      turn_on("HDMI2", options).should ==
+          "--output HDMI2 --mode 1920x1080 --rate 60.0 --reflect normal"
+    end
+
+    it "should raise an exception if a wrong --reflect directive is specified" do
+      options = {
+          :mode => "1920x1080",
+          :rate => "60.0",
+          :reflect => "this does not exist",
+      }
+
+      lambda { turn_on("HDMI2", options) }.should raise_error
+    end
   end
 end

@@ -35,6 +35,16 @@ module RMonitor
         end
       end
 
+      if options[:reflect]
+        allowed_options = %w(normal x y xy)
+
+        if allowed_options.include?(options[:reflect])
+          on << ' --reflect %s' % [options[:reflect]]
+        else
+          raise XRandRArgumentError.new("Invalid argument for --reflect")
+        end
+      end
+
       if options[:primary]
         on << ' --primary'
       end
