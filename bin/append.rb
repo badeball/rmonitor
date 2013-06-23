@@ -10,8 +10,16 @@ create = IO.popen([File.join(File.dirname(__FILE__), 'rmonitor.rb'),
 Process.wait(create.pid)
 
 if $?.success?
+  configuration = create.readlines.join
+
+  if $options[:verbose]
+    puts "Writing configuration to #{RMonitor::CONFIG_PATH}."
+    puts ""
+    puts configuration
+  end
+
   File.open(RMonitor::CONFIG_PATH, 'a') do |f|
-    f.write(create.readlines.join)
+    f.write(configuration)
   end
 else
   puts create.readlines

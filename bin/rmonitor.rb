@@ -27,6 +27,10 @@ OptionParser.new do |opts|
     $options[:action] = :update
   end
 
+  opts.on("-v", "--verbose", "Verbose output") do
+    $options[:verbose] = true
+  end
+
   opts.on_tail("-h", "--help", "Show this message") do
     puts opts
     exit

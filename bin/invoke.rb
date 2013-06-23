@@ -8,7 +8,9 @@ profile = rm.profiles.find { |p| p[:name] == $options[:name] }
 
 if profile
   if RMonitor::Profiles.invokable?(rm.devices, profile)
-    exec(RMonitor::Profiles.to_xrandr(rm.devices, profile))
+    command = RMonitor::Profiles.to_xrandr(rm.devices, profile)
+    puts "Invoking #{profile[:name].inspect} by running #{command.inspect}." if $options[:verbose]
+    exec(command)
   else
     puts 'error: this profile is not invokable'
   end

@@ -12,6 +12,7 @@ profile = rm.profiles.find do |profile|
 end
 
 if profile
+  puts "Found #{profile[:name].inspect} that is invokable." if $options[:verbose]
   $options[:name] = profile[:name]
   require File.join(File.dirname(__FILE__), 'invoke')
 else

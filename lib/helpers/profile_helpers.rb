@@ -1,7 +1,16 @@
 module RMonitor
   module ProfileHelpers
     def invokable?(devices, profile)
-      necessary_devices_present?(devices, profile) && user_defined_rules_satisfied?(profile)
+      necessary_devices_present    = necessary_devices_present?(devices, profile)
+      user_defined_rules_satisfied = user_defined_rules_satisfied?(profile)
+
+      if necessary_devices_present && !user_defined_rules_satisfied && $options[:verbose]
+        method = (profile[:options][:not_if] || profile[:options][:only_if]).name
+
+        puts "#{profile[:name].inspect} deemed not invokable due to #{method.inspect}."
+      end
+
+      necessary_devices_present && user_defined_rules_satisfied
     end
 
     def necessary_devices_present?(devices, profile)
