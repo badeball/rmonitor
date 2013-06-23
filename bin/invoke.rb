@@ -10,7 +10,7 @@ if profile
   if RMonitor::Profiles.invokable?(rm.devices, profile)
     command = RMonitor::Profiles.to_xrandr(rm.devices, profile)
     puts "Invoking #{profile[:name].inspect} by running #{command.inspect}." if $options[:verbose]
-    exec(command)
+    exec(command) unless $options[:dry_run]
   else
     puts 'error: this profile is not invokable'
   end
