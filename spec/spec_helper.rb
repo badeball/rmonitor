@@ -2,6 +2,8 @@
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
+$options = {}
+
 module RMonitor
   class XRandRArgumentError < ArgumentError; end
 end

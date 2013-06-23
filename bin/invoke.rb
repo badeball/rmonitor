@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
 rm = RMonitor::RMonitor.load
 
-profile = rm.profiles.find { |p| p[:name] == ARGV.first }
+profile = rm.profiles.find { |p| p[:name] == $options[:name] }
 
 if profile
   if RMonitor::Profiles.invokable?(rm.devices, profile)

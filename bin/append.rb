@@ -2,7 +2,10 @@
 
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
-create = IO.popen(['rmonitor', '--create', ARGV.first].compact, :err => [:child, :out])
+create = IO.popen([File.join(File.dirname(__FILE__), 'rmonitor.rb'),
+                   '--create',
+                   $options[:name]].compact,
+                  :err => [:child, :out])
 
 Process.wait(create.pid)
 

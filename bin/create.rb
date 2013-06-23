@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
 rm = RMonitor::RMonitor.load
 
-puts "profile #{(ARGV.first || 'My profile').inspect} do"
+puts "profile #{($options[:name] || 'My profile').inspect} do"
   rm.devices.each do |device|
     if device[:enabled]
       puts '  device %s, :mode => %s, :rate => %s, :pos => %s' % [
