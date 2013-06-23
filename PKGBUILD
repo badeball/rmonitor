@@ -28,11 +28,14 @@ package() {
     install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
     # Install the package
-    install -D -m755 bin/rmonitor.rb "${pkgdir}/usr/bin/${pkgname}"
-    install -D -m755 bin/append.rb   "${pkgdir}/usr/lib/${pkgname}/bin/append"
-    install -D -m755 bin/create.rb   "${pkgdir}/usr/lib/${pkgname}/bin/create"
-    install -D -m755 bin/invoke.rb   "${pkgdir}/usr/lib/${pkgname}/bin/invoke"
-    install -D -m755 bin/update.rb   "${pkgdir}/usr/lib/${pkgname}/bin/update"
+    install -D -m755 bin/rmonitor.rb "${pkgdir}/usr/lib/${pkgname}/bin/rmonitor.rb"
+    install -D -m755 bin/append.rb   "${pkgdir}/usr/lib/${pkgname}/bin/append.rb"
+    install -D -m755 bin/create.rb   "${pkgdir}/usr/lib/${pkgname}/bin/create.rb"
+    install -D -m755 bin/invoke.rb   "${pkgdir}/usr/lib/${pkgname}/bin/invoke.rb"
+    install -D -m755 bin/update.rb   "${pkgdir}/usr/lib/${pkgname}/bin/update.rb"
+
+    mkdir -p "$pkgdir/usr/bin"
+    ln -s "/usr/lib/${pkgname}/bin/rmonitor.rb" "${pkgdir}/usr/bin/${pkgname}"
 
     install -D -m644 lib/helpers/dsl_helpers.rb          "${pkgdir}/usr/lib/${pkgname}/lib/helpers/dsl_helpers.rb"
     install -D -m644 lib/helpers/profile_helpers.rb      "${pkgdir}/usr/lib/${pkgname}/lib/helpers/profile_helpers.rb"
