@@ -4,6 +4,65 @@ require File.join(File.dirname(__FILE__), '../../../lib/helpers/profile_helpers'
 describe RMonitor::ProfileHelpers do
   include RMonitor::ProfileHelpers
 
+  describe :invokable? do
+    after do
+      rspec_reset
+    end
+
+    context "with necessary devices not being present" do
+      it "should return false" do
+        stub!(:necessary_devices_present?).and_return(false)
+        stub!(:user_defined_rules_satisfied?).and_return(true)
+
+        invokable?(nil, nil).should be_false
+      end
+    end
+
+    context "with user defined rules not being satisfied" do
+      it "should return false" do
+        stub!(:necessary_devices_present?).and_return(true)
+        stub!(:user_defined_rules_satisfied?).and_return(false)
+
+        invokable?(nil, nil).should be_false
+      end
+    end
+
+    context "with necessary devices being present and user defined rules being satisfied" do
+      it "should return true" do
+        stub!(:necessary_devices_present?).and_return(true)
+        stub!(:user_defined_rules_satisfied?).and_return(true)
+
+        invokable?(nil, nil).should be_true
+      end
+    end
+  end
+
+  describe :user_defined_rules_satisfied? do
+    context "with :only_if being present" do
+      it "should return what the user defined rule is returning" do
+        profile = {
+            :options => {
+                :only_if => Proc.new { true }
+            }
+        }
+
+        user_defined_rules_satisfied?(profile).should be_true
+      end
+    end
+
+    context "with :not_if being present" do
+      it "should return the opposite of what the user defined rule is returning" do
+        profile = {
+            :options => {
+                :not_if => Proc.new { true }
+            }
+        }
+
+        user_defined_rules_satisfied?(profile).should be_false
+      end
+    end
+  end
+
   describe :best_matching_configuration do
     context "no matching configuration" do
       it "should return nil" do

@@ -11,6 +11,12 @@ module RMonitor
         device_parser = Device.new
         device_parser.instance_eval(&block)
 
+        if options[:only_if]
+          options[:only_if] = method(options[:only_if])
+        elsif options[:not_if]
+          options[:not_if] = method(options[:not_if])
+        end
+
         @profiles << { :name => name,
                        :options => options,
                        :devices => device_parser.devices }
