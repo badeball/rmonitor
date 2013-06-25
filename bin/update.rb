@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-$options ||= {}
-
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
 rm = RMonitor::RMonitor.load
