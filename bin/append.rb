@@ -1,27 +1,28 @@
 #!/usr/bin/env ruby
 
+require 'stringio'
+
 require File.join(File.dirname(__FILE__), '..', 'rmonitor')
 
-create = IO.popen([File.join(File.dirname(__FILE__), 'rmonitor.rb'),
-                   '--create',
-                   $options[:name]].compact,
-                  :err => [:child, :out])
+configuration = StringIO.new
+$stdout = configuration
 
-Process.wait(create.pid)
-
-if $?.success?
-  configuration = create.readlines.join
+begin
+  require File.join(File.dirname(__FILE__), 'create.rb')
 
   if $options[:verbose]
     puts "Writing configuration to #{RMonitor::CONFIG_PATH}."
     puts ""
-    puts configuration
+    puts configuration.string
   end
 
   File.open(RMonitor::CONFIG_PATH, 'a') do |f|
-    f.write(configuration)
+    f.write(configuration.string)
   end
-else
-  puts create.readlines
+
+  $stdout = STDOUT
+rescue Exception
+  $stdout = STDOUT
+  puts configuration.string
   puts 'error: rmonitor-create exited with a non-zero exit status'
 end
