@@ -16,3 +16,4 @@ puts "profile #{($options[:name] || 'My profile').inspect} do"
     end
   end
 puts 'end'
+puts ''
