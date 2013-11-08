@@ -30,7 +30,7 @@ module RMonitor
       end
 
       if profile[:options] and profile[:options][:dpi]
-        xrandr << ' --dpi ' << profile[:options][:dpi]
+        xrandr << ' --dpi ' << profile[:options][:dpi].to_s
       end
 
       # The devices contained in the profile are to be turned on and configured
