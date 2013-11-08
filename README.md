@@ -28,10 +28,12 @@ Usage:
 
 ```
 Usage: rmonitor [option]
-        --append [NAME]              Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)
-        --create [NAME]              Create and output a profile with an optional name
-        --invoke NAME                Invoke a profile with a given name
-        --update                     Invoke the most preferable profile
+    -a, --append [NAME]              Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)
+    -c, --create [NAME]              Create and output a profile with an optional name
+    -i, --invoke NAME                Invoke a profile with a given name
+    -u, --update                     Invoke the most preferable profile
+    -v, --verbose                    Verbose output
+    -d, --dry-run                    Do everything except actually update
     -h, --help                       Show this message
 ```
 
