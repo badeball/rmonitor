@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'helpers', 'xrandr_read_helpers')
+require 'rmonitor/helpers/xrandr_read_helpers'
 
 module RMonitor
   class Devices

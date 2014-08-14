@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '../../../lib/helpers/dsl_helpers')
+require 'rmonitor/helpers/dsl_helpers'
 
 describe RMonitor::DSLHelpers::Profile do
   context "with :only_if being present" do

@@ -1,6 +1,6 @@
-require File.join(File.dirname(__FILE__), 'helpers', 'dsl_helpers')
-require File.join(File.dirname(__FILE__), 'helpers', 'profile_helpers')
-require File.join(File.dirname(__FILE__), 'helpers', 'xrandr_write_helpers')
+require 'rmonitor/helpers/dsl_helpers'
+require 'rmonitor/helpers/profile_helpers'
+require 'rmonitor/helpers/xrandr_write_helpers'
 
 module RMonitor
   class Profiles

@@ -1,7 +1,7 @@
 require 'fileutils'
 
-require File.join(File.dirname(__FILE__), 'lib', 'devices')
-require File.join(File.dirname(__FILE__), 'lib', 'profiles')
+require 'rmonitor/devices'
+require 'rmonitor/profiles'
 
 module RMonitor
   class XRandRArgumentError < ArgumentError; end

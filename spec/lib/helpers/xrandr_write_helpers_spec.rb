@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '../../../lib/helpers/xrandr_write_helpers')
+require 'rmonitor/helpers/xrandr_write_helpers'
 
 describe RMonitor::XRandRWriteHelpers do
   include RMonitor::XRandRWriteHelpers

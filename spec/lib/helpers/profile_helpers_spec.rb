@@ -1,5 +1,5 @@
-require File.join(File.dirname(__FILE__), '../../../lib/devices')
-require File.join(File.dirname(__FILE__), '../../../lib/helpers/profile_helpers')
+require 'rmonitor/devices'
+require 'rmonitor/helpers/profile_helpers'
 
 describe RMonitor::ProfileHelpers do
   include RMonitor::ProfileHelpers
