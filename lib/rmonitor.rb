@@ -6,7 +6,9 @@ require 'rmonitor/profiles'
 class RMonitor
   class XRandRArgumentError < ArgumentError; end
 
-  CONFIG_PATH = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
+  class << self
+    attr_accessor :config_path
+  end
 
   attr_accessor :devices, :profiles
 
@@ -16,6 +18,6 @@ class RMonitor
   end
 
   def self.load
-    self.new(`xrandr -q`, File.new(CONFIG_PATH).read)
+    self.new(`xrandr -q`, File.new(config_path).read)
   end
 end

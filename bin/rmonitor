@@ -3,6 +3,8 @@
 require 'optparse'
 require 'rmonitor'
 
+RMonitor.config_path = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
+
 class << self
   attr_accessor :options
 end
@@ -33,6 +35,10 @@ OptionParser.new do |opts|
   opts.on("-d", "--dry-run", "Do everything except actually update (implies -v)") do
     options[:dry_run] = true
     options[:verbose] = true
+  end
+
+  opts.on("--config-path PATH", String, "Specify the path to the configuration file (defaults to ~/.config/rmonitor/config.rb") do |config_path|
+    RMonitor.config_path = config_path
   end
 
   opts.on_tail("-h", "--help", "Show this message") do
