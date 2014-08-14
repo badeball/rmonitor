@@ -8,11 +8,6 @@ $options = { :action => :create }
 OptionParser.new do |opts|
   opts.banner = "Usage: rmonitor [option]"
 
-  opts.on("-a", "--append [NAME]", String, "Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)") do |name|
-    $options[:action] = :append
-    $options[:name] = name
-  end
-
   opts.on("-c", "--create [NAME]", String, "Create and output a profile with an optional name") do |name|
     $options[:action] = :create
     $options[:name] = name

@@ -28,7 +28,6 @@ Usage:
 
 ```
 Usage: rmonitor [option]
-    -a, --append [NAME]              Create a profile with an optional name and append it to the config (~/.config/rmonitor/config.rb)
     -c, --create [NAME]              Create and output a profile with an optional name
     -i, --invoke NAME                Invoke a profile with a given name
     -u, --update                     Invoke the most preferable profile
@@ -48,10 +47,6 @@ profile "docked" do
   device "HDMI2", :mode => "1920x1080", :rate => "60.0", :pos => "1920x0"
 end
 ```
-
-### --append [NAME]
-
-Runs rmonitor with --create and appends the result to the configuration file.
 
 ### --invoke NAME
 
