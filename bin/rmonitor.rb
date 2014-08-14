@@ -47,6 +47,10 @@ def v_puts(content)
   end
 end
 
+def exit_with(content)
+  $stderr.puts content
+end
+
 rm = RMonitor::RMonitor.load
 
 if options[:action] == :update
@@ -60,7 +64,7 @@ if options[:action] == :update
     options[:name] = profile[:name]
     options[:action] = :invoke
   else
-    exit_with 'notice: no invokable profile exists'
+    exit_with 'no invokable profile exists'
   end
 end
 
@@ -73,10 +77,10 @@ if options[:action] == :invoke
       v_puts "Invoking #{profile[:name].inspect} by running #{command.inspect}."
       exec(command) unless options[:dry_run]
     else
-      puts 'error: this profile is not invokable'
+      exit_with 'this profile is not invokable'
     end
   else
-    puts 'notice: no profile with that name exists'
+    exit_with 'no profile with that name exists'
   end
 
 elsif options[:action] == :create
