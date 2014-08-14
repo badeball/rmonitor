@@ -133,3 +133,73 @@ profile "docked", :dpi => 96 do
   device "HDMI2"
 end
 ```
+
+## Changelog
+
+### 1.0.0
+
+* The -a option is removed.
+* Fixed a bug that caused rates with of more than one decimal to not get picked up.
+* Error messages are now outputted to stderr and the program exits with a non-zero status.
+* The library is now turned into a gem.
+* Added a --config-path option.
+* Added a --version option.
+
+### 0.0.9
+
+* Added one-letter short options.
+* Fixed an issue where it was impossible to specify DPI as an integer.
+
+### 0.0.8
+
+* Added a --dry-run option.
+* Added a --verbose option.
+* Added option for user defined rules to profiles.
+
+An :only_if or :not_if option may be specified with a profile. The value
+should correspond to a method defined within the configuration file and
+should return whether or not the profile can be invoked.
+
+The following code shows an example of how this is used.
+
+```ruby
+def laptop_lid_open?
+  File.read('/proc/acpi/button/lid/LID/state').match(/open/)
+end
+
+profile "docked", :only_if => :laptop_lid_open? do
+  device "LVDS1"
+  device "VGA1", :right_of => "LVDS1"
+end
+```
+
+### 0.0.7
+
+* Added support for the --reflect directive.
+* Added support for the --rotate directive.
+* Added support for the --same-as directive.
+
+### 0.0.6
+
+* Added support for the --dpi directive.
+
+### 0.0.5
+
+* Fixing bug with finding best configuration.
+* Added support for the --primary directive.
+
+### 0.0.4
+
+* The generated command for changing monitor profile now contains a part that first turns of all monitors.
+
+### 0.0.3
+
+* Correcting a bug in deducing invokability.
+
+### 0.0.2
+
+* Fixing bug with device specified without options.
+
+### 0.0.1
+
+* Initial work on the project.
