@@ -35,6 +35,7 @@ Usage: rmonitor [option]
     -d, --dry-run                    Do everything except actually update
         --config-path PATH           Specify the path to the configuration file (defaults to ~/.config/rmonitor/config.rb
     -h, --help                       Show this message
+        --version                    Print the version number of rmonitor
 ```
 
 ### --create [NAME]

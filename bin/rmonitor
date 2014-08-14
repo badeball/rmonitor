@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'rmonitor'
+require 'rmonitor/version'
 
 RMonitor.config_path = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
 
@@ -43,6 +44,11 @@ OptionParser.new do |opts|
 
   opts.on_tail("-h", "--help", "Show this message") do
     puts opts
+    exit
+  end
+
+  opts.on_tail("--version", "Print the version number of rmonitor") do
+    puts "rmonitor #{RMonitor::VERSION}"
     exit
   end
 end.parse!
