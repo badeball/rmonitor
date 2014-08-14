@@ -8,13 +8,6 @@ class RMonitor
 
   CONFIG_PATH = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
 
-  # Create a config directory and config file if they don't exist
-  begin
-    config_directory = File.dirname(CONFIG_PATH)
-    Dir::mkdir(config_directory) unless Dir.exists?(config_directory)
-    FileUtils.touch(CONFIG_PATH) unless File.exists?(CONFIG_PATH)
-  end
-
   attr_accessor :devices, :profiles
 
   def initialize(raw_devices_data, raw_profiles_data)
