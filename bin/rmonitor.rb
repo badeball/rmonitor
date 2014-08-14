@@ -4,7 +4,11 @@ require 'optparse'
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'rmonitor.rb'))
 
-options = { :action => :create }
+class << self
+  attr_accessor :options
+end
+
+self.options = { :action => :create }
 
 OptionParser.new do |opts|
   opts.banner = "Usage: rmonitor [option]"
@@ -37,6 +41,12 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+def v_puts(content)
+  if options[:verbose]
+    puts content
+  end
+end
+
 rm = RMonitor::RMonitor.load
 
 if options[:action] == :update
@@ -46,7 +56,7 @@ if options[:action] == :update
   end
 
   if profile
-    puts "Found #{profile[:name].inspect} that is invokable." if options[:verbose]
+    v_puts "Found #{profile[:name].inspect} that is invokable."
     options[:name] = profile[:name]
     options[:action] = :invoke
   else
@@ -60,7 +70,7 @@ if options[:action] == :invoke
   if profile
     if RMonitor::Profiles.invokable?(rm.devices, profile)
       command = RMonitor::Profiles.to_xrandr(rm.devices, profile)
-      puts "Invoking #{profile[:name].inspect} by running #{command.inspect}." if options[:verbose]
+      v_puts "Invoking #{profile[:name].inspect} by running #{command.inspect}."
       exec(command) unless options[:dry_run]
     else
       puts 'error: this profile is not invokable'
