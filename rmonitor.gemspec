@@ -1,6 +1,8 @@
+require File.join(File.dirname(__FILE__), 'lib', 'rmonitor', 'version')
+
 Gem::Specification.new do |s|
   s.name        = 'rmonitor'
-  s.version     = '0.0.9'
+  s.version     = RMonitor::VERSION
   s.license     = 'MIT'
   s.date        = '2014-08-14'
 
@@ -20,6 +22,7 @@ Gem::Specification.new do |s|
     lib/rmonitor/helpers/xrandr_write_helpers.rb
     lib/rmonitor/devices.rb
     lib/rmonitor/profiles.rb
+    lib/rmonitor/version.rb
     lib/rmonitor.rb
     spec/lib/helpers/dsl_helper_spec.rb
     spec/lib/helpers/profile_helpers_spec.rb
