@@ -182,6 +182,21 @@ describe RMonitor::XRandRReadHelpers do
                                                  :rate => "60.0" }
       end
     end
+
+    context "with a current configuration containing a rate with more than one decimal" do
+      it "should return the current configuration" do
+        block = <<-X.strip_heredoc
+            HDMI1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 477mm x 268mm
+               1920x1080      60.05*+
+               1280x1024      75.0     60.0
+               1152x864       75.0
+               1024x768       75.1     60.0
+        X
+
+        extract_configuration(block).should == { :mode => "1920x1080",
+                                                 :rate => "60.05" }
+      end
+    end
   end
 
   describe :extract_configurations do
@@ -227,6 +242,17 @@ describe RMonitor::XRandRReadHelpers do
                                                  { :mode => '800x600',  :rate => '60.3' },
                                                  { :mode => '800x600',  :rate => '56.2' },
                                                  { :mode => '640x480',  :rate => '59.9' }]
+      end
+    end
+
+    context "with rates containing more than one decimal" do
+      it "should return all possible configurations" do
+        block = <<-X.strip_heredoc
+            LVDS1 connected (normal left inverted right x axis y axis)
+               1280x800       60.05
+        X
+
+        extract_configurations(block).should == [{ :mode => '1280x800', :rate => '60.05' }]
       end
     end
   end

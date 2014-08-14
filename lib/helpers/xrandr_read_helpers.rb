@@ -37,7 +37,7 @@ module RMonitor
       block.split("\n")[1..-1].each do |configuration_line|
 
         # See if it contains any current configurations
-        if /(?<rate>\d+\.\d)\*/ =~ configuration_line
+        if /(?<rate>\d+\.\d+)\*/ =~ configuration_line
 
           # Extract the mode (resolution)
           /(?<mode>\d+x\d+)/ =~ configuration_line
@@ -61,7 +61,7 @@ module RMonitor
         /(?<mode>\d+x\d+)/ =~ configuration_block
 
         # Extract each supported frame rate of that mode (resolution)
-        configuration_block.scan(/\d+\.\d/).each do |rate|
+        configuration_block.scan(/\d+\.\d+/).each do |rate|
           configurations <<  {
               :mode => mode,
               :rate => rate,
