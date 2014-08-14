@@ -3,9 +3,3 @@
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
-$options = {}
-
-module RMonitor
-  class XRandRArgumentError < ArgumentError; end
-end
