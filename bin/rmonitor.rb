@@ -2,6 +2,8 @@
 
 require 'optparse'
 
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'rmonitor.rb'))
+
 $options = { :action => :create }
 
 OptionParser.new do |opts|
@@ -35,10 +37,49 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-file = if File.symlink?(__FILE__)
-         File.readlink(__FILE__)
-       else
-         File.expand_path(__FILE__)
-       end
+rm = RMonitor::RMonitor.load
 
-require File.join(File.dirname(file), $options[:action].to_s)
+if $options[:action] == :update
+  # Find the first invokable profile
+  profile = rm.profiles.find do |profile|
+    RMonitor::Profiles.invokable?(rm.devices, profile)
+  end
+
+  if profile
+    puts "Found #{profile[:name].inspect} that is invokable." if $options[:verbose]
+    $options[:name] = profile[:name]
+    $options[:action] = :invoke
+  else
+    exit_with 'notice: no invokable profile exists'
+  end
+end
+
+if $options[:action] == :invoke
+  profile = rm.profiles.find { |p| p[:name] == $options[:name] }
+
+  if profile
+    if RMonitor::Profiles.invokable?(rm.devices, profile)
+      command = RMonitor::Profiles.to_xrandr(rm.devices, profile)
+      puts "Invoking #{profile[:name].inspect} by running #{command.inspect}." if $options[:verbose]
+      exec(command) unless $options[:dry_run]
+    else
+      puts 'error: this profile is not invokable'
+    end
+  else
+    puts 'notice: no profile with that name exists'
+  end
+
+elsif $options[:action] == :create
+  puts "profile #{($options[:name] || 'My profile').inspect} do"
+  rm.devices.each do |device|
+    if device[:enabled]
+      puts '  device %s, :mode => %s, :rate => %s, :pos => %s' % [
+          device[:name].inspect,
+          device[:configuration][:mode].inspect,
+          device[:configuration][:rate].inspect,
+          device[:pos].inspect,
+      ]
+    end
+  end
+  puts 'end'
+end
