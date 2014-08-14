@@ -30,8 +30,9 @@ OptionParser.new do |opts|
     options[:verbose] = true
   end
 
-  opts.on("-d", "--dry-run", "Do everything except actually update") do
+  opts.on("-d", "--dry-run", "Do everything except actually update (implies -v)") do
     options[:dry_run] = true
+    options[:verbose] = true
   end
 
   opts.on_tail("-h", "--help", "Show this message") do
