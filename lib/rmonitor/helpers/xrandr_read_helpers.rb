@@ -1,4 +1,4 @@
-module RMonitor
+class RMonitor
   module XRandRReadHelpers
     def split_blocks(devices_data)
       block = /

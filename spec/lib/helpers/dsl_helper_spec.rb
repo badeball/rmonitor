@@ -1,9 +1,9 @@
 require 'rmonitor/helpers/dsl_helpers'
 
-describe RMonitor::DSLHelpers::Profile do
+describe RMonitor::DSLHelpers::ProfileBuilder do
   context "with :only_if being present" do
     it "should replace the symbol with the respective method proc" do
-      profile_parser = RMonitor::DSLHelpers::Profile.new
+      profile_parser = RMonitor::DSLHelpers::ProfileBuilder.new
 
       profile_parser.define_singleton_method(:user_defined_rule) do
         # No operation
@@ -16,7 +16,7 @@ describe RMonitor::DSLHelpers::Profile do
 
   context "with :not_if being present" do
     it "should replace the symbol with the respective method proc" do
-      profile_parser = RMonitor::DSLHelpers::Profile.new
+      profile_parser = RMonitor::DSLHelpers::ProfileBuilder.new
 
       profile_parser.define_singleton_method(:user_defined_rule) do
         # No operation

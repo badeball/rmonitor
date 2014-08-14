@@ -1,4 +1,4 @@
-module RMonitor
+class RMonitor
   module ProfileHelpers
     def invokable?(devices, profile, verbose = false)
       necessary_devices_present    = necessary_devices_present?(devices, profile)

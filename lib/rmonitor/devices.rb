@@ -1,6 +1,6 @@
 require 'rmonitor/helpers/xrandr_read_helpers'
 
-module RMonitor
+class RMonitor
   class Devices
     extend XRandRReadHelpers
 

@@ -1,6 +1,6 @@
-module RMonitor
+class RMonitor
   module DSLHelpers
-    class Profile
+    class ProfileBuilder
       attr_accessor :profiles
 
       def initialize
@@ -8,8 +8,8 @@ module RMonitor
       end
 
       def profile(name, options = {}, &block)
-        device_parser = Device.new
-        device_parser.instance_eval(&block)
+        device_builder = DeviceBuilder.new
+        device_builder.instance_eval(&block)
 
         if options[:only_if]
           options[:only_if] = method(options[:only_if])
@@ -19,11 +19,11 @@ module RMonitor
 
         @profiles << { :name => name,
                        :options => options,
-                       :devices => device_parser.devices }
+                       :devices => device_builder.devices }
       end
     end
 
-    class Device
+    class DeviceBuilder
       attr_accessor :devices
 
       def initialize

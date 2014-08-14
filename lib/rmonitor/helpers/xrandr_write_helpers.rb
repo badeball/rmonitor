@@ -1,4 +1,4 @@
-module RMonitor
+class RMonitor
   module XRandRWriteHelpers
     def turn_off(device)
       "--output #{device} --off"

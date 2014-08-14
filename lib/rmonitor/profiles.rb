@@ -2,16 +2,16 @@ require 'rmonitor/helpers/dsl_helpers'
 require 'rmonitor/helpers/profile_helpers'
 require 'rmonitor/helpers/xrandr_write_helpers'
 
-module RMonitor
+class RMonitor
   class Profiles
     include DSLHelpers
     extend ProfileHelpers
     extend XRandRWriteHelpers
 
     def self.parse(config_data)
-      profile_parser = Profile.new
-      profile_parser.instance_eval(config_data)
-      profile_parser.profiles
+      profile_builder = ProfileBuilder.new
+      profile_builder.instance_eval(config_data)
+      profile_builder.profiles
     end
 
     def self.to_xrandr(devices, profile)
