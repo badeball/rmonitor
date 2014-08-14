@@ -59,6 +59,26 @@ invokable profile based on what devices that are currently connected. This is
 likely the most used option and may for instance be used to automatically
 configure your screens upon startup.
 
+## Installation
+
+The utility can be installed using `gem`, but is also packaged for Arch Linux.
+
+```
+$ gem install rmonitor
+```
+
+It can be installed system-wide using the following options.
+
+```
+$ gem install --no-user-install -i "$(ruby -e'puts Gem.default_dir')" -n /usr/bin rmonitor
+```
+
+### Arch Linux
+
+```
+$ yaourt -Syua ruby-rmonitor
+```
+
 ## Configurable options
 
 The following examples shows how RMonitor can be configured.
