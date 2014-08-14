@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
 
   s.authors     = ['Jonas Amundsen']
   s.email       = ['jonasba+gem@gmail.com']
+  s.homepage    = 'https://github.com/badeball/rmonitor'
 
   s.executables = 'rmonitor'
 
