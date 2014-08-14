@@ -49,6 +49,7 @@ end
 
 def exit_with(content)
   $stderr.puts content
+  exit! 1
 end
 
 rm = RMonitor::RMonitor.load
