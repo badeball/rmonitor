@@ -15,11 +15,6 @@ self.options = { :action => :create }
 OptionParser.new do |opts|
   opts.banner = "Usage: rmonitor [option]"
 
-  opts.on("-c", "--create [NAME]", String, "Create and output a profile with an optional name") do |name|
-    options[:action] = :create
-    options[:name] = name
-  end
-
   opts.on("-i", "--invoke NAME", String, "Invoke a profile with a given name") do |name|
     options[:action] = :invoke
     options[:name] = name
@@ -95,18 +90,4 @@ if options[:action] == :invoke
   else
     exit_with 'no profile with that name exists'
   end
-
-elsif options[:action] == :create
-  puts "profile #{(options[:name] || 'My profile').inspect} do"
-  rm.devices.each do |device|
-    if device[:enabled]
-      puts '  device %s, :mode => %s, :rate => %s, :pos => %s' % [
-          device[:name].inspect,
-          device[:configuration][:mode].inspect,
-          device[:configuration][:rate].inspect,
-          device[:pos].inspect,
-      ]
-    end
-  end
-  puts 'end'
 end
