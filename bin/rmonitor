@@ -15,34 +15,34 @@ self.options = { :action => :create }
 OptionParser.new do |opts|
   opts.banner = "Usage: rmonitor [option]"
 
-  opts.on("-i", "--invoke NAME", String, "Invoke a profile with a given name") do |name|
+  opts.on("-i", "--invoke NAME", String, "invoke a profile with a given name") do |name|
     options[:action] = :invoke
     options[:name] = name
   end
 
-  opts.on("-u", "--update", "Invoke the most preferable profile") do
+  opts.on("-u", "--update", "invoke the most preferable profile") do
     options[:action] = :update
   end
 
-  opts.on("-v", "--verbose", "Verbose output") do
+  opts.on("-v", "--verbose", "verbose output") do
     options[:verbose] = true
   end
 
-  opts.on("-d", "--dry-run", "Do everything except actually update (implies -v)") do
+  opts.on("-d", "--dry-run", "perform a dry run (implies -v)") do
     options[:dry_run] = true
     options[:verbose] = true
   end
 
-  opts.on("--config-path PATH", String, "Specify the path to the configuration file (defaults to ~/.config/rmonitor/config.rb") do |config_path|
+  opts.on("--config-path PATH", String, "path to the configuration file (defaults to ~/.config/rmonitor/config.rb") do |config_path|
     RMonitor.config_path = config_path
   end
 
-  opts.on_tail("-h", "--help", "Show this message") do
+  opts.on_tail("-h", "--help", "show this message") do
     puts opts
     exit
   end
 
-  opts.on_tail("--version", "Print the version number of rmonitor") do
+  opts.on_tail("--version", "print the version number of rmonitor") do
     puts "rmonitor #{RMonitor::VERSION}"
     exit
   end
