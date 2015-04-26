@@ -4,8 +4,6 @@ require 'optparse'
 require 'rmonitor'
 require 'rmonitor/version'
 
-RMonitor.config_path = File.join(Dir.home, '.config', 'rmonitor', 'config.rb')
-
 class << self
   attr_accessor :options
 end
