@@ -11,6 +11,7 @@ GEM
     builder (3.2.2)
     commander (4.3.4)
       highline (~> 1.7.2)
+    fakefs (0.6.7)
     highline (1.7.7)
     minitest (5.5.1)
     minitest-reporters (1.1.2)
@@ -25,6 +26,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fakefs (= 0.6.7)
   minitest (= 5.5.1)
   minitest-reporters (= 1.1.2)
   rake (= 10.4.2)
