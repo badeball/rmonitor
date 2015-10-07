@@ -1,5 +1,11 @@
+require "rmonitor/config/builder"
+
 class RMonitor
   class Config
+    def profiles
+      Builder.define read
+    end
+
     def read
       File.read self.class.config_path
     end
