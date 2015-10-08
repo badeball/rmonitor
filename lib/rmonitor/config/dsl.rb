@@ -1,3 +1,5 @@
+require "rmonitor/profile/builder"
+
 class RMonitor
   class Config
     class DSL
@@ -8,13 +10,7 @@ class RMonitor
       end
 
       def profile(name, options = {}, &block)
-        @profiles << options.merge(:name => name)
-        instance_eval &block
-      end
-
-      def device(name, options = {})
-        @profiles.last[:devices] ||= []
-        @profiles.last[:devices] << options.merge(:name => name)
+        @profiles << RMonitor::Profile::Builder.define(name, options, &block)
       end
     end
   end
