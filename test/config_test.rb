@@ -5,18 +5,16 @@ require "fileutils"
 describe RMonitor::Config do
 
   before :each do
+    FakeFS.activate!
+
     RMonitor::Config.config_path = nil
   end
 
+  after :each do
+    FakeFS.deactivate!
+  end
+
   describe "#read" do
-
-    before :each do
-      FakeFS.activate!
-    end
-
-    after :each do
-      FakeFS.deactivate!
-    end
 
     it "should by default return the content of #{DEFAULT_CONFIG_PATH}" do
       FileUtils.mkdir_p File.dirname DEFAULT_CONFIG_PATH
@@ -37,6 +35,7 @@ describe RMonitor::Config do
   describe "#profiles" do
 
     it "should build and return the profiles contained in the config" do
+      FileUtils.mkdir_p File.dirname DEFAULT_CONFIG_PATH
       File.write DEFAULT_CONFIG_PATH, <<-CONFIG
         profile "docked" do
           device "HDMI1", :mode => "1920x1080", :rate => "60.0"
