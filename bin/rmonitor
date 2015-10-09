@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require "commander/import"
+require "rmonitor"
+require "rmonitor/version"
+
+program :name, "rmonitor"
+program :version, RMonitor::VERSION
+program :description, "A tool for creating monitor profiles that are easily invoked."
+
+global_option "--verbose"
+global_option "--dry-run"
+
+command :invoke do |c|
+  c.syntax = "invoke [options]"
+  c.description = "invoke a profile by name"
+  c.option '--name STRING', String
+  c.action do |_, options|
+    RMonitor::Commands::Invoke.new(
+      :verbose => options.verbose,
+      :dry_run => options.dry_run
+    ).execute(options.name)
+  end
+end
+
+command :list do |c|
+  c.syntax = "list"
+  c.description = "lists all available profiles"
+  c.action do |_, options|
+    RMonitor::Commands::List.new(
+      :verbose => options.verbose,
+      :dry_run => options.dry_run
+    ).execute
+  end
+end
+
+command :update do |c|
+  c.syntax = "update"
+  c.description = "invokes the most preferred profile"
+  c.action do |_, options|
+    RMonitor::Commands::Update.new(
+      :verbose => options.verbose,
+      :dry_run => options.dry_run
+    ).execute
+  end
+end
