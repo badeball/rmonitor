@@ -1,3 +1,5 @@
+require "rmonitor/strategies/optimistic"
+require "rmonitor/strategies/pessimistic"
 require "rmonitor/actions"
 require "rmonitor/capabilities"
 require "rmonitor/config"
