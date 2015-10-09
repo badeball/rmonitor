@@ -5,6 +5,9 @@ class RMonitor
     end
 
     def invokable?(profile)
+      return false if profile.has_key?(:only_if) && !profile[:only_if].call
+      return false if profile.has_key?(:not_if) && profile[:not_if].call
+
       profile[:devices].all? do |device|
         has_desired_capability? device
       end
