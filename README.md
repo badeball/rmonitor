@@ -1,6 +1,8 @@
 ## RMonitor
 
 [![Build Status](https://travis-ci.org/badeball/rmonitor.png)](https://travis-ci.org/badeball/rmonitor)
+[![Code Climate](https://codeclimate.com/github/badeball/rmonitor/badges/gpa.svg)](https://codeclimate.com/github/badeball/rmonitor)
+[![Test Coverage](https://codeclimate.com/github/badeball/rmonitor/badges/coverage.svg)](https://codeclimate.com/github/badeball/rmonitor/coverage)
 
 RMonitor is a tool for creating monitor profiles that are easily invoked. This
 is useful when you often find yourself in situations with different monitor
