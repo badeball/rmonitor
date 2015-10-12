@@ -16,7 +16,7 @@ command :invoke do |c|
   c.description = "invoke a profile by name"
   c.option '--name STRING', String
   c.action do |_, options|
-    RMonitor::Commands::Invoke.new(
+    RMonitor::Commands::CL::Invoke.new(
       :verbose => options.verbose,
       :dry_run => options.dry_run
     ).execute(options.name)
@@ -27,7 +27,7 @@ command :list do |c|
   c.syntax = "list"
   c.description = "lists all available profiles"
   c.action do |_, options|
-    RMonitor::Commands::List.new(
+    RMonitor::Commands::CL::List.new(
       :verbose => options.verbose,
       :dry_run => options.dry_run
     ).execute
@@ -38,7 +38,7 @@ command :update do |c|
   c.syntax = "update"
   c.description = "invokes the most preferred profile"
   c.action do |_, options|
-    RMonitor::Commands::Update.new(
+    RMonitor::Commands::CL::Update.new(
       :verbose => options.verbose,
       :dry_run => options.dry_run
     ).execute
