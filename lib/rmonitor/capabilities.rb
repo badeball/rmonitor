@@ -3,10 +3,10 @@ require "rmonitor/capabilities/builder"
 class RMonitor
   class Capabilities
     def initialize(options = {})
-      @invoker = options[:invoker] || Invoker.new(options)
+      @xrandr = options[:xrandr] || XRandR.new(options)
     end
 
-    def parse(input = @invoker.invoke("xrandr"))
+    def parse(input = @xrandr.invoke)
       capabilities = []
       current_name = nil
 
