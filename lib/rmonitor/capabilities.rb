@@ -13,7 +13,7 @@ class RMonitor
       input = input.split("\n").tap(&:shift).map(&:strip)
 
       input.each do |line|
-        if /(?<name>\w+) (dis)?connected/ =~ line
+        if /(?<name>[\w\d-]+) (dis)?connected/ =~ line
           current_name = name
         end
 
