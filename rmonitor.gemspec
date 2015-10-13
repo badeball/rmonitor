@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.version     = RMonitor::VERSION
   s.license     = "MIT"
 
-  s.summary     = "A tool for creating monitor profiles that are easily invoked."
-  s.description = "RMonitor is a tool for creating monitor profiles that are easily invoked. This is useful when you often find yourself in situations with different monitor configurations."
+  s.summary     = "A tool for defining monitor profiles that are easily invoked."
+  s.description = "RMonitor is a tool for defining monitor profiles that can be invoked. This is useful when you often find yourself in situations with different monitor configurations."
 
   s.authors     = ["Jonas Amundsen"]
   s.email       = ["jonasba+gem@gmail.com"]

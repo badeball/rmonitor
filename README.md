@@ -4,11 +4,10 @@
 [![Code Climate](https://codeclimate.com/github/badeball/rmonitor/badges/gpa.svg)](https://codeclimate.com/github/badeball/rmonitor)
 [![Test Coverage](https://codeclimate.com/github/badeball/rmonitor/badges/coverage.svg)](https://codeclimate.com/github/badeball/rmonitor/coverage)
 
-RMonitor is a tool for creating monitor profiles that are easily invoked. This
-is useful when you often find yourself in situations with different monitor
-configurations. It consists of one executable and a ruby configuration file.
-The following example shows a configuration containing monitor profiles
-representing three different monitor setups.
+RMonitor is a tool for defining monitor profiles that can be invoked. This is
+useful when you often find yourself in situations with different monitor
+configurations. The following example shows a configuration containing monitor
+profiles representing three different setups.
 
 ```ruby
 profile "docked" do
@@ -26,46 +25,14 @@ profile "default" do
 end
 ```
 
-Usage:
-
-```
-Usage: rmonitor [option]
-    -c, --create [NAME]              Create and output a profile with an optional name
-    -i, --invoke NAME                Invoke a profile with a given name
-    -u, --update                     Invoke the most preferable profile
-    -v, --verbose                    Verbose output
-    -d, --dry-run                    Do everything except actually update
-        --config-path PATH           Specify the path to the configuration file (defaults to ~/.config/rmonitor/config.rb
-    -h, --help                       Show this message
-        --version                    Print the version number of rmonitor
-```
-
-### --create [NAME]
-
-Outputs a profile for your current setup.
-
-```
-$ rmonitor --create "docked"
-profile "docked" do
-  device "HDMI1", :mode => "1920x1080", :rate => "60.0", :pos => "0x0"
-  device "HDMI2", :mode => "1920x1080", :rate => "60.0", :pos => "1920x0"
-end
-```
-
-### --invoke NAME
-
-Invokes a monitor profile by generating an xrandr query.
-
-### --update
-
-Parses the configuration file from top to bottom and invokes the first
-invokable profile based on what devices that are currently connected. This is
-likely the most used option and may for instance be used to automatically
-configure your screens upon startup.
+A configuration is parsed and considered from top to bottom. The first profile
+that is currently invokable (ie. the requested devices with modes and rates are
+available) is preferred. Profiles can also be invoked by name. `xrandr` is used
+behind the scenes to read devices and perform changes.
 
 ## Installation
 
-The utility can be installed using `gem`, but is also packaged for Arch Linux.
+The utility can be installed using `gem`.
 
 ```
 $ gem install rmonitor
@@ -74,18 +41,43 @@ $ gem install rmonitor
 It can be installed system-wide using the following options.
 
 ```
-$ gem install --no-user-install -i "$(ruby -e'puts Gem.default_dir')" -n /usr/bin rmonitor
+$ gem install --no-user-install -i "$(ruby -e'puts Gem.default_dir')" -n /usr/local/bin rmonitor
 ```
 
-### Arch Linux
+It is also packaged for Arch Linux.
 
 ```
-$ yaourt -Syua ruby-rmonitor
+$ yaourt -S ruby-rmonitor
+```
+
+## Usage
+
+The executable contains three sub-commands. `invoke` will invoke a monitor
+profile by name.
+
+```
+$ rmonitor invoke --name "docked"
+```
+
+The `update` command will invoke the most preferred monitor profile. This
+command can be mapped to XF86Display to achieve the functionality that one can
+see in eg, windows or apple machines.
+
+```
+$ rmonitor update
+```
+
+Lastly there is `list` which just list all defined monitor profiles.
+
+```
+$ rmonitor list
 ```
 
 ## Configurable options
 
-The following examples shows how RMonitor can be configured.
+The following examples shows how RMonitor can be configured. The default
+configuration path is `~/.config/rmonitor/config.rb`, but can be configured
+using the `--config-path` argument.
 
 ```ruby
 # Specify device location with position
@@ -137,6 +129,21 @@ end
 ```
 
 ## Changelog
+
+### 2.0.0
+
+* Re-implementing the --config-path option.
+* Re-implementing the :dpi profile option.
+
+### 2.0.0.rc2
+
+* Relaxing the regular expression for matching device names. Previously it
+  would not match eg. `DP1-1`, but now it does.
+
+### 2.0.0.rc1
+
+* Complete revamp of the codebase. Test coverage is wastly better. The code is
+  more maintainable and ready for change.
 
 ### 1.0.0
 
