@@ -11,6 +11,13 @@ program :description, "A tool for creating monitor profiles that are easily invo
 global_option "--verbose"
 global_option "--dry-run"
 
+global_option "-c", "--config-path PATH", <<DESC.strip do |path|
+  Specify the path to the configuration file (defaults to ~/.config/rmonitor/config.rb)
+DESC
+  RMonitor::Config.config_path = path
+end
+
+
 command :invoke do |c|
   c.syntax = "invoke [options]"
   c.description = "invoke a profile by name"
