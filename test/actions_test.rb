@@ -38,6 +38,23 @@ describe RMonitor::Actions do
       assert_subset_of RMonitor::Actions.new(:capabilities => capabilities).create(profile), off_actions
     end
 
+    it "should create option actions for profile options (eg. dpi)" do
+      capabilities = RMonitor::Capabilities::Builder.define do
+        device "HDMI1", :mode => "1920x1080", :rate => "60.0"
+        device "HDMI2", :mode => "1920x1080", :rate => "60.0"
+      end
+
+      profile = RMonitor::Profile::Builder.define "docked", :dpi => 96 do
+        device "HDMI1", :mode => "1920x1080", :rate => "60.0"
+      end
+
+      option_actions = RMonitor::Actions::Builder.define do
+        dpi 96
+      end
+
+      assert_subset_of RMonitor::Actions.new(:capabilities => capabilities).create(profile), option_actions
+    end
+
   end
 
 end

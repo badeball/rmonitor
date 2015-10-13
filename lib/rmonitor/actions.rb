@@ -16,6 +16,10 @@ class RMonitor
         actions << {:action => :off, :name => device}
       end
 
+      if profile[:dpi]
+        actions << {:action => :option, :name => :dpi, :value => profile[:dpi]}
+      end
+
       profile[:devices].each do |device|
         actions << device.merge(:action => :on)
       end

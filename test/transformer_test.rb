@@ -134,6 +134,16 @@ describe RMonitor::Transformer do
       assert_equal ["--output", "HDMI1", "--reflect", "normal"], transformation
     end
 
+    it "should transform the global :dpi option" do
+      actions = RMonitor::Actions::Builder.define do
+        dpi 96
+      end
+
+      transformation = RMonitor::Transformer.new.transform(actions.first)
+
+      assert_equal ["--dpi", "96"], transformation
+    end
+
     it "should transform actions of type :off" do
       actions = RMonitor::Actions::Builder.define do
         off "HDMI1"

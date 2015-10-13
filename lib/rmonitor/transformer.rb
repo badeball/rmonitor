@@ -1,11 +1,20 @@
 class RMonitor
   class Transformer
     def transform(action)
-      args = ["--output", action.delete(:name)]
-
-      if action.delete(:action) == :off
-        args << "--off"
+      case action.delete(:action)
+        when :off
+          transform_off(action)
+        when :on
+          transform_on(action)
+        when :option
+          transforn_option(action)
       end
+    end
+
+    private
+
+    def transform_on(action)
+      args = ["--output", action.delete(:name)]
 
       action.each do |key, value|
         args << "--#{key.to_s.gsub("_", "-")}"
@@ -16,6 +25,14 @@ class RMonitor
       end
 
       args
+    end
+
+    def transform_off(action)
+      ["--output", action.delete(:name), "--off"]
+    end
+
+    def transforn_option(action)
+      ["--#{action[:name].to_s.gsub("_", "-")}", action[:value].to_s]
     end
   end
 end
