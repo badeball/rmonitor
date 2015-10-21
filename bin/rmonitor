@@ -14,17 +14,25 @@ DESC
   RMonitor::Config.config_path = path
 end
 
+def create_common_options(c)
+  c.option "--dry-run", "don't run any destructive commands"
+  c.option "--verbose", "print every command ran"
+end
+
+def create_option_hash(options)
+  {
+    :dry_run => options.dry_run,
+    :verbose => options.verbose
+  }
+end
+
 command :invoke do |c|
   c.syntax = "invoke [options]"
   c.description = "invoke a profile by name"
   c.option "-n", "--name NAME", String
-  c.option "--dry-run", "don't run any destructive commands"
-  c.option "--verbose", "print every command ran"
+  create_common_options(c)
   c.action do |_, options|
-    RMonitor::Commands::CL::Invoke.new(
-      :verbose => options.verbose,
-      :dry_run => options.dry_run
-    ).execute(options.name)
+    RMonitor::Commands::CL::Invoke.new(create_option_hash(options)).execute(options.name)
   end
 end
 
@@ -39,12 +47,8 @@ end
 command :update do |c|
   c.syntax = "update"
   c.description = "invokes the most preferred profile"
-  c.option "--dry-run", "don't run any destructive commands"
-  c.option "--verbose", "print every command ran"
+  create_common_options(c)
   c.action do |_, options|
-    RMonitor::Commands::CL::Update.new(
-      :verbose => options.verbose,
-      :dry_run => options.dry_run
-    ).execute
+    RMonitor::Commands::CL::Update.new(create_option_hash(options)).execute
   end
 end
