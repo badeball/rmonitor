@@ -15,15 +15,36 @@ DESC
 end
 
 def create_common_options(c)
+  c.option "--strategy NAME", String, <<-DESC.strip.gsub(/^ +/, "")
+    invoke using an execution strategy
+
+    the possible options are
+
+    · optimistic - attempt to invoke a profile using a single xrandr command
+
+    · pessimistic - invoke a profile using multiple xrandr commands (slower, safer and default)
+  DESC
+
   c.option "--dry-run", "don't run any destructive commands"
   c.option "--verbose", "print every command ran"
 end
 
 def create_option_hash(options)
-  {
+  hash = {
     :dry_run => options.dry_run,
     :verbose => options.verbose
   }
+
+  hash[:strategy] = case options.strategy
+                      when "optimistic"
+                        RMonitor::Strategies::Optimistic.new(hash)
+                      when "pessimistic", nil
+                        RMonitor::Strategies::Pessimistic.new(hash)
+                      else
+                        raise ArgumentError, "unknown execution strategy"
+                    end
+
+  hash
 end
 
 command :invoke do |c|
